@@ -1,0 +1,92 @@
+```java
+// Задача 1: S = 1 + x/1! + x^2/2! + ... + x^n/n! для x в [0; 2], eps = 0.00001
+// (Предполагаем, что double x, double eps уже определены)
+double sum1 = 1.0;
+double term1 = 1.0;
+int n1 = 1;
+double currentTermAbs1;
+do {
+    term1 = term1 * x / n1;
+    currentTermAbs1 = Math.abs(term1);
+    if (currentTermAbs1 >= eps) {
+         sum1 += term1;
+    }
+    n1++;
+} while (currentTermAbs1 >= eps);
+// Результат в sum1
+```
+
+```java
+// Задача 2: S = 1 - x^2/2! + x^4/4! - ... + (-1)^n * x^(2n)/(2n)! для x в [1; 1], eps = 0.0001
+// (Предполагаем, что double x, double eps уже определены)
+double sum2 = 1.0;
+double term2 = 1.0;
+int n2 = 1;
+double currentTermAbs2;
+do {
+     // Calculate next term: term_n = -term_(n-1) * x^2 / ((2n-1) * 2n)
+    term2 = -term2 * x * x / ((2 * n2 - 1) * (2 * n2));
+    currentTermAbs2 = Math.abs(term2);
+    if (currentTermAbs2 >= eps) {
+        sum2 += term2;
+    }
+    n2++;
+} while (currentTermAbs2 >= eps);
+// Результат в sum2
+```
+
+```java
+// Задача 5: S = cos(x) + cos(2x)/2 + ... + cos(nx)/n для x в [pi/5; 9pi/5], eps = 0.0001
+// (Предполагаем, что double x, double eps уже определены)
+double sum5 = 0.0;
+double term5;
+int n5 = 1;
+while (true) {
+    term5 = Math.cos(n5 * x) / n5;
+    if (Math.abs(term5) < eps) {
+        break; // Выходим, если член ряда достаточно мал
+    }
+    sum5 += term5;
+    n5++;
+}
+// Результат в sum5
+```
+
+```java
+// Задача 6: S = x + x^3/3! + x^5/5! + ... + x^(2n+1)/(2n+1)! для x в [0; 1], eps = 0.00005
+// (Предполагаем, что double x, double eps уже определены)
+double sum6 = 0.0;
+double term6 = x; // Первый член ряда (n=0)
+int n6 = 1;
+double currentTermAbs6;
+do {
+     currentTermAbs6 = Math.abs(term6);
+     if (currentTermAbs6 >= eps) {
+        sum6 += term6;
+         // Calculate next term: term_n = term_(n-1) * x^2 / (2n * (2n+1))
+        term6 = term6 * x * x / ((2 * n6) * (2 * n6 + 1));
+        n6++;
+    }
+} while (currentTermAbs6 >= eps);
+// Результат в sum6
+```
+
+```java
+// Задача 8: S = cos(x) + cos(3x)/3^2 + ... + cos((2n-1)x) / (2n-1)^2 для x в [pi/5; pi], eps = 0.0001
+// (Предполагаем, что double x, double eps уже определены)
+double sum8 = 0.0;
+double term8;
+int n8 = 1;
+while (true) {
+    double denom = 2.0 * n8 - 1.0;
+    term8 = Math.cos(denom * x) / (denom * denom);
+     if (Math.abs(term8) < eps) {
+        break; // Выходим, если член ряда достаточно мал
+    }
+    sum8 += term8;
+    n8++;
+}
+// Результат в sum8
+```
+
+**Вывод:** Я научился(лась) программно вычислять значения математических функций, представленных в виде бесконечных рядов (Тейлора, Фурье и др.), используя итерационные алгоритмы с контролем точности вычислений на языке Java.
